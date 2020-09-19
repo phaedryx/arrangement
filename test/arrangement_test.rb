@@ -4,10 +4,6 @@ require 'test_helper'
 
 class ArrangementTest < Minitest::Test
   def test_that_it_has_a_version_number
-    refute_nil ::Arrangement::VERSION
-  end
-
-  def test_it_does_something_useful
-    assert false
+    assert ::Arrangement::VERSION
   end
 end
