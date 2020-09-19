@@ -1,6 +1,10 @@
 # Arrangement
 
-[![phaedryx](https://circleci.com/gh/phaedryx/arrangement.svg?style=shield)](https://circleci.com/gh/phaedryx/arrangement)
+![Gem](https://img.shields.io/gem/v/arrangement) &nbsp;&nbsp;
+![GitHub last commit](https://img.shields.io/github/last-commit/phaedryx/arrangement) &nbsp;&nbsp;
+![GitHub](https://img.shields.io/github/license/phaedryx/arrangement?color=blue) &nbsp;&nbsp;
+[![phaedryx](https://circleci.com/gh/phaedryx/arrangement.svg?style=shield)](https://circleci.com/gh/phaedryx/arrangement) &nbsp;&nbsp;
+![testing](https://img.shields.io/badge/AAA-testing-blue)
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/arrangement`. To experiment with that code, run `bin/console` for an interactive prompt.
 
