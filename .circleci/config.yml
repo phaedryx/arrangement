@@ -1,0 +1,30 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@1.0
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.6.3-stretch-node
+    steps:
+      - checkout
+      - ruby/install-deps
+
+  test:
+    docker:
+      - image: circleci/ruby:2.6.3-stretch-node
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: run tests
+          command: bundle exec rake test
+
+workflows:
+  version: 1
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
