@@ -9,14 +9,14 @@ Gem::Specification.new do |spec|
   spec.email       = ['phaedryx@gmail.com']
   spec.summary     = 'An easy way to follow the "Arrange, Act, Assert" pattern in your Ruby on Rails tests'
   spec.description = 'An easy way to follow the "Arrange, Act, Assert" pattern in your Ruby on Rails tests'
-  spec.homepage    = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage    = 'https://github.com/phaedryx/arrangement'
   spec.license     = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
 
   spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
   spec.metadata['homepage_uri']      = spec.homepage
-  spec.metadata['source_code_uri']   = "TODO: Put your gem's public repo URL here."
-  spec.metadata['changelog_uri']     = "TODO: Put your gem's CHANGELOG.md URL here."
+  spec.metadata['source_code_uri']   = 'https://github.com/phaedryx/arrangement'
+  spec.metadata['changelog_uri']     = 'https://github.com/phaedryx/arrangement'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
