@@ -2,7 +2,8 @@ PATH
   remote: .
   specs:
     arrangement (0.0.1)
-      railties (~> 6.0.0)
+      activerecord (~> 6.0)
+      railties (~> 6.0)
 
 GEM
   remote: https://rubygems.org/
@@ -20,6 +21,11 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    activemodel (6.0.3.3)
+      activesupport (= 6.0.3.3)
+    activerecord (6.0.3.3)
+      activemodel (= 6.0.3.3)
+      activesupport (= 6.0.3.3)
     activesupport (6.0.3.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
@@ -28,6 +34,8 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     ast (2.4.1)
     builder (3.2.4)
+    byebug (11.1.3)
+    coderay (1.1.3)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
     erubi (1.9.0)
@@ -46,6 +54,12 @@ GEM
     parallel (1.19.2)
     parser (2.7.1.4)
       ast (~> 2.4.1)
+    pry (0.13.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-byebug (3.9.0)
+      byebug (~> 11.0)
+      pry (~> 0.13.0)
     rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -76,6 +90,7 @@ GEM
     rubocop-ast (0.4.2)
       parser (>= 2.7.1.4)
     ruby-progressbar (1.10.1)
+    sqlite3 (1.4.2)
     thor (1.0.1)
     thread_safe (0.3.6)
     tzinfo (1.2.7)
@@ -91,8 +106,11 @@ DEPENDENCIES
   arrangement!
   minitest (~> 5.14)
   minitest-focus (~> 1.2)
+  pry (~> 0.13)
+  pry-byebug (~> 3.9)
   rake (~> 13.0)
   rubocop (~> 0.91.0)
+  sqlite3 (~> 1.4)
   yard (~> 0.9.25)
 
 BUNDLED WITH

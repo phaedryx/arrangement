@@ -4,3 +4,6 @@ $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 
 require 'arrangement'
 require 'minitest/autorun'
+require 'minitest/focus'
+require 'minitest/spec'
+require 'pry'
