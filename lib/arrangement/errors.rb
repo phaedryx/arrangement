@@ -1,6 +1,5 @@
-  # frozen_string_literal: true
+# frozen_string_literal: true
 
-  module Arrangement
-    class Error < StandardError; end
-  end
-  
+module Arrangement
+  class Error < StandardError; end
+end

@@ -1,7 +1,10 @@
 AllCops:
+  NewCops: enable
   TargetRubyVersion: 2.6
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 99
 
-Naming/RescuedExceptionsVariableName: { PreferredName: err }
+Naming/RescuedExceptionsVariableName:
+  PreferredName: err
+
