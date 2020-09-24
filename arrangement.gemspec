@@ -7,10 +7,12 @@ Gem::Specification.new do |spec|
   spec.version     = Arrangement::VERSION
   spec.authors     = ['Tad Thorley']
   spec.email       = ['phaedryx@gmail.com']
-  spec.summary     = 'An easy way to make arrangements for the "Arrange, Act, Assert" pattern'
-  spec.description = 'An easy way to follow the "Arrange, Act, Assert" pattern in your Ruby on Rails tests'
   spec.homepage    = 'https://github.com/phaedryx/arrangement'
   spec.license     = 'MIT'
+  spec.summary     = 'An easy way to make arrangements for the "Arrange, Act, Assert" pattern'
+  spec.description = <<~DESCRIPTION
+    An easy way to follow the "Arrange, Act, Assert" pattern in your Ruby on Rails tests
+  DESCRIPTION
 
   spec.metadata['allowed_push_host'] = 'https://rubygems.org'
   spec.metadata['homepage_uri']      = spec.homepage
