@@ -18,7 +18,7 @@ jobs:
       - ruby/install-deps
       - run:
           name: run rubocop
-          command: rubocop
+          command: bundle exec rubocop
       - run:
           name: run tests
           command: bundle exec rake test
