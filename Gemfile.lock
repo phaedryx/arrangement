@@ -39,6 +39,7 @@ GEM
     concurrent-ruby (1.1.7)
     crass (1.0.6)
     erubi (1.9.0)
+    erubis (2.7.0)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     loofah (2.7.0)
@@ -104,6 +105,7 @@ PLATFORMS
 
 DEPENDENCIES
   arrangement!
+  erubis (~> 2.7)
   minitest (~> 5.14)
   minitest-focus (~> 1.2)
   pry (~> 0.13)

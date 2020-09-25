@@ -8,3 +8,7 @@ Layout/LineLength:
 Naming/RescuedExceptionsVariableName:
   PreferredName: err
 
+Metrics/BlockLength:
+  Exclude:
+    - test/**/*
+    - arrangement.gemspec
