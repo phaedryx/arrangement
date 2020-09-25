@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require 'arrangement/enumerators'
 require 'arrangement/errors'
 require 'arrangement/composer'
+require 'arrangement/schema'
 require 'arrangement/version'
 
 ##
