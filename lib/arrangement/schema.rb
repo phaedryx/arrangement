@@ -9,10 +9,10 @@ module Arrangement
       value.respond_to?(:call) ? value.call : value
     end
 
-    def transform(collection)
+    def collect_call(collection)
       case collection
-      when Hash then collection.transform_values { |v| transform(v) }
-      when Array then collection.map { |v| transform(v) }
+      when Hash then collection.transform_values { |v| collect_call(v) }
+      when Array then collection.map { |v| collect_call(v) }
       else call(collection)
       end
     end
@@ -26,15 +26,15 @@ module Arrangement
     end
 
     def clone
-      transform(super)
+      collect_call(super)
     end
 
     def dup
-      transform(super)
+      collect_call(super)
     end
 
     def to_h
-      transform(super)
+      collect_call(super)
     end
 
     def self.load(string)
@@ -43,16 +43,26 @@ module Arrangement
       escaped_string = string.gsub(/`/, ';-;')
       hash = YAML.safe_load(escaped_string)
 
-      hash.transform_keys!(&:to_sym)
+      new.merge(transform(hash))
+    end
 
-      hash.transform_values! do |value|
-        evaluable = value.to_s.match(/^;-;(.+?);-;$/)
+    def self.load_file(path)
+      load(File.read(path))
+    end
+
+    def self.transform(collection)
+      case collection
+      when Hash
+        collection.transform_keys!(&:to_sym)
+        collection.transform_values! { |v| transform(v) }
+      when Array
+        collection.map { |v| transform(v) }
+      else
+        evaluable = collection.to_s.match(/^;-;(.+?);-;$/)
         # rubocop:disable Security/Eval
-        evaluable ? eval(evaluable[1], Arrangement::Enumerators.eval_binding) : value
+        evaluable ? eval(evaluable[1], Arrangement::Enumerators.eval_binding) : collection
         # rubocop:enable Security/Eval
       end
-
-      new.merge(hash)
     end
   end
 end
