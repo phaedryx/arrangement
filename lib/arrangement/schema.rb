@@ -37,32 +37,38 @@ module Arrangement
       collect_call(super)
     end
 
-    def self.load(string)
-      # Backticks are nice for readability but are not allowed in YAML so
-      # replace them with something usable
-      escaped_string = string.gsub(/`/, ';-;')
-      hash = YAML.safe_load(escaped_string)
+    class << self
+      def load(string)
+        # Backticks are nice for readability but are not allowed in YAML so
+        # replace them with something usable
+        escaped_string = string.gsub(/`/, ';-;')
+        hash = YAML.safe_load(escaped_string)
 
-      new.merge(transform(hash))
-    end
-
-    def self.load_file(path)
-      load(File.read(path))
-    end
-
-    def self.transform(collection)
-      case collection
-      when Hash
-        collection.transform_keys!(&:to_sym)
-        collection.transform_values! { |v| transform(v) }
-      when Array
-        collection.map { |v| transform(v) }
-      else
-        evaluable = collection.to_s.match(/^;-;(.+?);-;$/)
-        # rubocop:disable Security/Eval
-        evaluable ? eval(evaluable[1], Arrangement::Enumerators.eval_binding) : collection
-        # rubocop:enable Security/Eval
+        new.merge(transform(hash))
       end
+
+      def load_file(path)
+        load(File.read(path))
+      end
+
+      ##
+      # something with an eval should be private
+      #
+      def transform(collection)
+        case collection
+        when Hash
+          collection.transform_keys!(&:to_sym)
+          collection.transform_values! { |v| transform(v) }
+        when Array
+          collection.map { |v| transform(v) }
+        else
+          evaluable = collection.to_s.match(/^;-;(.+?);-;$/)
+          # rubocop:disable Security/Eval
+          evaluable ? eval(evaluable[1], Arrangement::Enumerators.eval_binding) : collection
+          # rubocop:enable Security/Eval
+        end
+      end
+      private :transform
     end
   end
 end

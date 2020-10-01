@@ -128,8 +128,8 @@ describe Arrangement::Schema do
     it 'should take a yaml file and return a schema' do
       schema = Arrangement::Schema.load_file('./test/arrangement/example_schema.yml')
 
-      assert_equal({id: 10, first_name: 'Tony', last_name: 'Stark' }, schema.to_h)
-      assert_equal({id: 15, first_name: 'Tony', last_name: 'Stark' }, schema.to_h)
+      assert_equal({ id: 10, first_name: 'Tony', last_name: 'Stark' }, schema.to_h)
+      assert_equal({ id: 15, first_name: 'Tony', last_name: 'Stark' }, schema.to_h)
     end
   end
 end
