@@ -25,37 +25,37 @@ describe Arrangement::Schema do
     end
   end
 
-  describe '#transform' do
-    it 'should transform callable values in collections' do
+  describe '#collect_call' do
+    it 'should change callable values in collections' do
       schema = Arrangement::Schema.new
       hash = { foo: 'bar', callable: incrementer }
 
-      assert_equal({ foo: 'bar', callable: 1 }, schema.transform(hash))
-      assert_equal({ foo: 'bar', callable: 2 }, schema.transform(hash))
+      assert_equal({ foo: 'bar', callable: 1 }, schema.collect_call(hash))
+      assert_equal({ foo: 'bar', callable: 2 }, schema.collect_call(hash))
     end
 
-    it 'should transform nested hashes' do
+    it 'should handle nested hashes' do
       schema = Arrangement::Schema.new
       hash = { foo: { bar: { baz: incrementer } } }
 
-      assert_equal({ foo: { bar: { baz: 1 } } }, schema.transform(hash))
-      assert_equal({ foo: { bar: { baz: 2 } } }, schema.transform(hash))
+      assert_equal({ foo: { bar: { baz: 1 } } }, schema.collect_call(hash))
+      assert_equal({ foo: { bar: { baz: 2 } } }, schema.collect_call(hash))
     end
 
-    it 'should transform nested arrays' do
+    it 'should handle nested arrays' do
       schema = Arrangement::Schema.new
       hash = { foo: [incrementer, incrementer] }
 
-      assert_equal({ foo: [1, 1] }, schema.transform(hash))
-      assert_equal({ foo: [2, 2] }, schema.transform(hash))
+      assert_equal({ foo: [1, 1] }, schema.collect_call(hash))
+      assert_equal({ foo: [2, 2] }, schema.collect_call(hash))
     end
 
-    it 'should transform hashes mixed with arrays' do
+    it 'should handle hashes mixed with arrays' do
       schema = Arrangement::Schema.new
       hash = { foo: [{ bar: incrementer }, { baz: { qux: incrementer } }] }
 
-      assert_equal({ foo: [{ bar: 1 }, { baz: { qux: 1 } }] }, schema.transform(hash))
-      assert_equal({ foo: [{ bar: 2 }, { baz: { qux: 2 } }] }, schema.transform(hash))
+      assert_equal({ foo: [{ bar: 1 }, { baz: { qux: 1 } }] }, schema.collect_call(hash))
+      assert_equal({ foo: [{ bar: 2 }, { baz: { qux: 2 } }] }, schema.collect_call(hash))
     end
   end
 
@@ -110,15 +110,26 @@ describe Arrangement::Schema do
   end
 
   describe '.load' do
-    it 'should take a yaml-like string and return a schema' do
+    it 'should take a nested yaml-like string and return a schema' do
       schema = Arrangement::Schema.load <<~YAML
-        id: `incrementer(0, 5)`
-        name: Dave
+        foo:
+          bar: `incrementer(1,1)`
+          baz:
+            - `incrementer(2,2)`
+            - `incrementer(3,3)`
       YAML
+      assert_equal({ foo: { bar: 1, baz: [2, 3] } }, schema.to_h)
+      assert_equal({ foo: { bar: 2, baz: [4, 6] } }, schema.to_h)
+      assert_equal({ foo: { bar: 3, baz: [6, 9] } }, schema.to_h)
+    end
+  end
 
-      assert_equal({ id: 0, name: 'Dave' }, schema.to_h)
-      assert_equal({ id: 5, name: 'Dave' }, schema.to_h)
-      assert_equal({ id: 10, name: 'Dave' }, schema.to_h)
+  describe '.load_file' do
+    it 'should take a yaml file and return a schema' do
+      schema = Arrangement::Schema.load_file('./test/arrangement/example_schema.yml')
+
+      assert_equal({ id: 10, first_name: 'Tony', last_name: 'Stark' }, schema.to_h)
+      assert_equal({ id: 15, first_name: 'Tony', last_name: 'Stark' }, schema.to_h)
     end
   end
 end
