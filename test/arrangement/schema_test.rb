@@ -4,7 +4,7 @@ require 'test_helper'
 
 describe Arrangement::Schema do
   def incrementer
-    Arrangement::Enumerators.incrementer
+    Arrangement::Generators.incrementer
   end
 
   describe '#call' do

@@ -4,11 +4,15 @@ module Arrangement
   ##
   # TODO: better comment
   #
-  module Enumerators
+  module Generators
     module_function
 
     def eval_binding
       binding
+    end
+
+    def add(name, &block)
+      define_singleton_method(name, block)
     end
 
     def incrementer(start = 1, step = 1)
@@ -20,6 +24,20 @@ module Arrangement
       end
 
       -> { enumerator.next }
+    end
+
+    def cycler(collection)
+      enumerator = collection.cycle
+
+      -> { enumerator.next }
+    end
+
+    def string_incrementer(string)
+      lambda do
+        temp = string
+        string = string.next
+        temp
+      end
     end
   end
 end

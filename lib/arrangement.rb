@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'arrangement/enumerators'
 require 'arrangement/errors'
+require 'arrangement/generators'
 require 'arrangement/composer'
 require 'arrangement/schema'
 require 'arrangement/version'
@@ -17,4 +17,8 @@ module Arrangement
   def new(schema); end
 
   def create(schema); end
+
+  def add_generator(name, &block)
+    Generators.add(name, &block)
+  end
 end
