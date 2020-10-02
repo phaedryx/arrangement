@@ -39,10 +39,7 @@ module Arrangement
 
     class << self
       def load(string)
-        # Backticks are nice for readability but are not allowed in YAML so
-        # replace them with something usable
-        escaped_string = string.gsub(/`/, ';-;')
-        hash = YAML.safe_load(escaped_string)
+        hash = YAML.safe_load(string)
 
         new.merge(transform(hash))
       end
@@ -62,7 +59,7 @@ module Arrangement
         when Array
           collection.map { |v| transform(v) }
         else
-          evaluable = collection.to_s.match(/^;-;(.+?);-;$/)
+          evaluable = collection.to_s.match(/^<(.+?)>$/)
           # rubocop:disable Security/Eval
           evaluable ? eval(evaluable[1], Arrangement::Generators.eval_binding) : collection
           # rubocop:enable Security/Eval
