@@ -59,7 +59,7 @@ module Arrangement
         when Array
           collection.map { |v| transform(v) }
         else
-          evaluable = collection.to_s.match(/^<(.+?)>$/)
+          evaluable = collection.to_s.match(/^<=(.+?)$/)
           # rubocop:disable Security/Eval
           evaluable ? eval(evaluable[1], Arrangement::Generators.eval_binding) : collection
           # rubocop:enable Security/Eval
