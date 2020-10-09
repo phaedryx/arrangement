@@ -113,10 +113,10 @@ describe Arrangement::Schema do
     it 'should take a nested yaml-like string and return a schema' do
       schema = Arrangement::Schema.load <<~YAML
         foo:
-          bar: `incrementer(1,1)`
+          bar: <= incrementer(1,1)
           baz:
-            - `incrementer(2,2)`
-            - `incrementer(3,3)`
+            - <= incrementer(2,2)
+            - <= incrementer(3,3)
       YAML
       assert_equal({ foo: { bar: 1, baz: [2, 3] } }, schema.to_h)
       assert_equal({ foo: { bar: 2, baz: [4, 6] } }, schema.to_h)
