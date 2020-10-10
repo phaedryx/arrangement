@@ -39,5 +39,9 @@ module Arrangement
         temp
       end
     end
+
+    def random_number(min, max)
+      -> { rand(max - min) + min }
+    end
   end
 end

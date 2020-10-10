@@ -1,0 +1,6 @@
+widget:
+  id: <= incrementer
+  runcible: <= cycler([true, false])
+  color: <= cycler(%w[red orange yellow green blue purple])
+  size: <= random_number(1, 10)
+  description: 'widgety'

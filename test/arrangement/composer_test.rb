@@ -33,6 +33,20 @@ class Widget < ActiveRecord::Base
 end
 
 describe Arrangement::Composer do
+  describe '#new' do
+    it 'should load default schemas' do
+      composer = Arrangement::Composer.new(schemas_directory_path: 'test/schemas')
+
+      assert composer.defaults.is_a?(Arrangement::Schema)
+
+      assert_equal({ id: 1, first_name: 'BobA', last_name: 'Jones' }, composer.defaults[:user].to_h)
+      assert_equal({ id: 2, first_name: 'BobB', last_name: 'Jones' }, composer.defaults[:user].to_h)
+
+      assert_equal(1, composer.defaults[:widget].to_h[:id])
+      assert_equal(2, composer.defaults[:widget].to_h[:id])
+    end
+  end
+
   describe '#create' do
     it 'creates a top-level object' do
       composer = Arrangement::Composer.new

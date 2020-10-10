@@ -1,0 +1,4 @@
+user:
+  id: <= incrementer
+  first_name: <= string_incrementer('BobA')
+  last_name: Jones

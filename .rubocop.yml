@@ -12,3 +12,6 @@ Metrics/BlockLength:
   Exclude:
     - test/**/*
     - arrangement.gemspec
+
+Metrics/MethodLength:
+  Max: 16
