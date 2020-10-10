@@ -39,8 +39,14 @@ describe Arrangement::Composer do
 
       assert composer.defaults.is_a?(Arrangement::Schema)
 
-      assert_equal({ id: 1, first_name: 'BobA', last_name: 'Jones' }, composer.defaults[:user].to_h)
-      assert_equal({ id: 2, first_name: 'BobB', last_name: 'Jones' }, composer.defaults[:user].to_h)
+      assert_equal(
+        { id: 1, first_name: 'BobA', last_name: 'Jones' },
+        composer.defaults[:user].to_h
+      )
+      assert_equal(
+        { id: 2, first_name: 'BobB', last_name: 'Jones' },
+        composer.defaults[:user].to_h
+      )
 
       assert_equal(1, composer.defaults[:widget].to_h[:id])
       assert_equal(2, composer.defaults[:widget].to_h[:id])
