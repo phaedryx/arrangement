@@ -9,12 +9,28 @@ ActiveRecord::Migration.verbose = false
 
 ActiveRecord::Schema.define do
   create_table(:users) do |t|
-    t.string  :first_name
-    t.string  :last_name
+    t.string :first_name
+    t.string :last_name
   end
 end
 
-class User < ActiveRecord::Base; end
+ActiveRecord::Schema.define do
+  create_table(:widgets) do |t|
+    t.integer :user_id
+    t.boolean :runcible
+    t.string  :color
+    t.decimal :size
+    t.text    :description
+  end
+end
+
+class User < ActiveRecord::Base
+  has_many :widgets
+end
+
+class Widget < ActiveRecord::Base
+  belongs_to :user
+end
 
 describe Arrangement::Composer do
   describe '#create' do
