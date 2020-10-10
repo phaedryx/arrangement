@@ -79,26 +79,6 @@ describe Arrangement::Schema do
     end
   end
 
-  describe '#clone' do
-    it 'should return the call result of the values when copied' do
-      schema = Arrangement::Schema.new
-      schema.merge!({ foo: 'bar', callable: incrementer })
-
-      assert_equal({ foo: 'bar', callable: 1 }, schema.clone)
-      assert_equal({ foo: 'bar', callable: 2 }, schema.clone)
-    end
-  end
-
-  describe '#dup' do
-    it 'should return the call result of the values when copied' do
-      schema = Arrangement::Schema.new
-      schema.merge!({ foo: 'bar', callable: incrementer })
-
-      assert_equal({ foo: 'bar', callable: 1 }, schema.dup)
-      assert_equal({ foo: 'bar', callable: 2 }, schema.dup)
-    end
-  end
-
   describe '#to_h' do
     it 'should return a hash with the call result of values' do
       schema = Arrangement::Schema.new
