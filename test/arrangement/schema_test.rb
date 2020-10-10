@@ -109,6 +109,20 @@ describe Arrangement::Schema do
     end
   end
 
+  describe '#merge' do
+    it 'should preserve callables when merging' do
+      schema = Arrangement::Schema.new
+      user = Arrangement::Schema.new
+      widget = Arrangement::Schema.new
+
+      user[:user] = incrementer
+      widget[:widget] = incrementer
+      schema = schema.merge(user.merge(widget))
+
+      assert_equal({ user: 1, widget: 1 }, schema.to_h)
+    end
+  end
+
   describe '.load' do
     it 'should take a nested yaml-like string and return a schema' do
       schema = Arrangement::Schema.load <<~YAML
