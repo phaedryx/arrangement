@@ -41,7 +41,7 @@ module Arrangement
     end
 
     def random_number(min, max)
-      -> { rand(max - min) + min }
+      -> { rand(min..max) }
     end
   end
 end
